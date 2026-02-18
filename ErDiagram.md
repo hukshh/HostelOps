@@ -1,65 +1,56 @@
-# ER Diagram – Database Design
+# ER Diagram – HostelOps Database Design
 
-## Collections
+```mermaid
+erDiagram
 
-### Users
-- _id
-- name
-- email
-- password
-- role (admin/student)
+    USERS {
+        ObjectId _id PK
+        string name
+        string email
+        string password
+        string role
+        date createdAt
+        date updatedAt
+    }
 
-### Rooms
-- _id
-- roomNumber
-- capacity
-- currentOccupancy
+    ROOMS {
+        ObjectId _id PK
+        string roomNumber
+        int capacity
+        int currentOccupancy
+        date createdAt
+        date updatedAt
+    }
 
-### Payments
-- _id
-- studentId (ref Users)
-- amount
-- dueDate
-- status
-- transactionId
+    PAYMENTS {
+        ObjectId _id PK
+        ObjectId studentId FK
+        float amount
+        date dueDate
+        string status
+        string transactionId
+        date createdAt
+    }
 
-### Complaints
-- _id
-- studentId (ref Users)
-- title
-- description
-- status
-- createdAt
+    COMPLAINTS {
+        ObjectId _id PK
+        ObjectId studentId FK
+        string title
+        string description
+        string status
+        date createdAt
+        date updatedAt
+    }
 
-### Attendance
-- _id
-- studentId (ref Users)
-- date
-- status
+    ATTENDANCE {
+        ObjectId _id PK
+        ObjectId studentId FK
+        date date
+        string status
+        date createdAt
+    }
 
----
-
-## Relationships
-
-- One User (Student) can have many Payments.
-- One User (Student) can have many Complaints.
-- One User (Student) can have many Attendance records.
-- One Room can have multiple Students.
-- Each Payment belongs to one Student.
-
----
-
-## PlantUML ER Code
-
-@startuml
-entity Users
-entity Rooms
-entity Payments
-entity Complaints
-entity Attendance
-
-Users ||--o{ Payments
-Users ||--o{ Complaints
-Users ||--o{ Attendance
-Rooms ||--o{ Users
-@enduml
+    USERS ||--o{ PAYMENTS : makes
+    USERS ||--o{ COMPLAINTS : raises
+    USERS ||--o{ ATTENDANCE : marks
+    ROOMS ||--o{ USERS : contains
