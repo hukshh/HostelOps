@@ -1,56 +1,50 @@
-# Use Case Diagram – HostelOps
+# Use Case Diagram – HostelOps (UML)
 
-## Actors
-1. Admin
-2. Student
+```mermaid
+flowchart TB
 
----
+    %% Actors
+    Admin["<<Actor>> Admin"]
+    Student["<<Actor>> Student"]
 
-## Admin Use Cases
-- Login
-- Manage Rooms
-- Assign Student to Room
-- Track Rent Payments
-- View Dashboard Analytics
-- Generate Monthly Reports
-- Manage Complaints
-- Approve Attendance
+    %% System Boundary
+    subgraph HostelOps System
 
----
+        UC1(("Login"))
+        UC2(("Register"))
+        UC3(("Manage Rooms"))
+        UC4(("Assign Student to Room"))
+        UC5(("Track Rent Payments"))
+        UC6(("Generate Monthly Reports"))
+        UC7(("View Dashboard"))
+        UC8(("Manage Complaints"))
+        UC9(("Approve Attendance"))
 
-## Student Use Cases
-- Register
-- Login
-- View Room Details
-- Mark Attendance
-- Pay Rent
-- View Payment History
-- Raise Complaint
-- Track Complaint Status
+        UC10(("View Room Details"))
+        UC11(("Mark Attendance"))
+        UC12(("Pay Rent"))
+        UC13(("View Payment History"))
+        UC14(("Raise Complaint"))
+        UC15(("Track Complaint Status"))
 
----
+    end
 
-## PlantUML Code
+    %% Admin Associations
+    Admin --> UC1
+    Admin --> UC3
+    Admin --> UC4
+    Admin --> UC5
+    Admin --> UC6
+    Admin --> UC7
+    Admin --> UC8
+    Admin --> UC9
 
-@startuml
-actor Admin
-actor Student
-
-Admin --> (Login)
-Admin --> (Manage Rooms)
-Admin --> (Assign Room)
-Admin --> (Track Rent)
-Admin --> (View Dashboard)
-Admin --> (Generate Reports)
-Admin --> (Manage Complaints)
-Admin --> (Approve Attendance)
-
-Student --> (Register)
-Student --> (Login)
-Student --> (View Room Details)
-Student --> (Mark Attendance)
-Student --> (Pay Rent)
-Student --> (View Payment History)
-Student --> (Raise Complaint)
-Student --> (Track Complaint Status)
-@enduml
+    %% Student Associations
+    Student --> UC2
+    Student --> UC1
+    Student --> UC10
+    Student --> UC11
+    Student --> UC12
+    Student --> UC13
+    Student --> UC14
+    Student --> UC15
