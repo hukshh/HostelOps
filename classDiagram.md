@@ -1,98 +1,67 @@
 # Class Diagram – HostelOps Backend Design
 
-## Core Classes
+```mermaid
+classDiagram
 
-### User (Abstract Class)
-- id
-- name
-- email
-- password
-- role
-+ login()
-+ logout()
+    class User {
+        +ObjectId _id
+        +String name
+        +String email
+        +String password
+        +String role
+        +login()
+        +logout()
+    }
 
-### Admin extends User
-+ manageRoom()
-+ generateReport()
-+ resolveComplaint()
+    class Admin {
+        +manageRoom()
+        +generateReport()
+        +resolveComplaint()
+    }
 
-### Student extends User
-+ markAttendance()
-+ raiseComplaint()
-+ payRent()
+    class Student {
+        +markAttendance()
+        +raiseComplaint()
+        +payRent()
+    }
 
-### Room
-- roomNumber
-- capacity
-- currentOccupancy
-+ assignStudent()
-+ removeStudent()
+    class Room {
+        +ObjectId _id
+        +String roomNumber
+        +int capacity
+        +int currentOccupancy
+        +assignStudent()
+        +removeStudent()
+    }
 
-### Payment
-- amount
-- dueDate
-- status
-- transactionId
-+ processPayment()
-+ generateReceipt()
+    class Payment {
+        +ObjectId _id
+        +float amount
+        +Date dueDate
+        +String status
+        +String transactionId
+        +processPayment()
+        +generateReceipt()
+    }
 
-### Complaint
-- title
-- description
-- status
-+ updateStatus()
+    class Complaint {
+        +ObjectId _id
+        +String title
+        +String description
+        +String status
+        +updateStatus()
+    }
 
-### Attendance
-- date
-- status
-+ mark()
+    class Attendance {
+        +ObjectId _id
+        +Date date
+        +String status
+        +mark()
+    }
 
----
-
-## PlantUML Code
-
-@startuml
-class User {
-  id
-  name
-  email
-  password
-  role
-  login()
-  logout()
-}
-
-class Admin
-class Student
-
-User <|-- Admin
-User <|-- Student
-
-class Room {
-  roomNumber
-  capacity
-  currentOccupancy
-}
-
-class Payment {
-  amount
-  dueDate
-  status
-}
-
-class Complaint {
-  title
-  description
-  status
-}
-
-class Attendance {
-  date
-  status
-}
-
-Student --> Room
-Student --> Payment
-Student --> Complaint
-Student --> Attendance
-@enduml
+    User <|-- Admin
+    User <|-- Student
+    Student --> Room
+    Student --> Payment
+    Student --> Complaint
+    Student --> Attendance
