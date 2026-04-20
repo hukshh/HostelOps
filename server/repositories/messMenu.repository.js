@@ -1,0 +1,6 @@
+/**
+ * Mess Menu Repository
+ *
+ * Placeholder — will be implemented in Phase 6.
+ * Mongoose queries for weekly menus and meal ratings.
+ */
